@@ -59,6 +59,9 @@ class MemUtils:
     def readInt16(self, addr, *offsets):
         return self.readByPointer(c_int16, addr, *offsets)
 
+    def readFloat(self, addr, *offsets):
+        return self.readByPointer(c_float, addr, *offsets)
+
 
 def getMemOps() -> MemUtils:
     global gmemOps
