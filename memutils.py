@@ -1,3 +1,4 @@
+from _ctypes import _SimpleCData
 from ctypes import *
 
 OpenProcess = windll.kernel32.OpenProcess
@@ -5,32 +6,55 @@ ReadProcessMemory = windll.kernel32.ReadProcessMemory
 CloseHandle = windll.kernel32.CloseHandle
 
 PROCESS_ALL_ACCESS = 0x1F0FFF
+
+
 def openProc(pid):
-    global processHandle
-    processHandle = OpenProcess(PROCESS_ALL_ACCESS, False, pid)
-
-def readInteger(addr):
-    num = c_int(0)
-    bufferSize = 4
-    bytesRead = c_ulong(0)
-    if ReadProcessMemory(processHandle, addr, byref(num), bufferSize, byref(bytesRead)):
-        print("Success: " + str(num.value))
-    else:
-        print("Failed. " + str(num.value))
-    return num.value
+    return OpenProcess(PROCESS_ALL_ACCESS, False, pid)
 
 
-def readByteArr(addr, size):
-    from utils import hex0
-    global processHandle
-    buffer = create_string_buffer(size)
-    bytesRead = c_ulong(0)
-    if ReadProcessMemory(processHandle, addr, buffer, c_int(size), byref(bytesRead)) and bytesRead.value == size:
-        print("Success: " + hex0(buffer.raw))
-    else:
-        print("Failed. " + hex0(buffer.raw))
-    return buffer
+class MemUtils:
+    def __init__(self, handle):
+        self.handle = handle
+        self.debugPtrs = True
 
+    def readInteger(self, addr):
+        num = c_int(0)
+        bufferSize = 4
+        bytesRead = c_ulong(0)
+        if ReadProcessMemory(self.handle, addr, byref(num), bufferSize, byref(bytesRead)):
+            num.value
+        return num.value
 
-def readInt(addr):
-    return cast(readByteArr(addr, 4), POINTER(c_int)).contents.value
+    def readByteArr(self, addr, size):
+        from utils import hex0
+        global processHandle
+        buffer = create_string_buffer(size)
+        bytesRead = c_ulong(0)
+        if ReadProcessMemory(self.handle, addr, buffer, c_int(size), byref(bytesRead)) and bytesRead.value == size:
+            print("Success: " + hex0(buffer.raw))
+        else:
+            print("Failed. " + hex0(buffer.raw))
+        return buffer
+
+    def readInt(self, addr):
+        return cast(self.readByteArr(addr, 4), POINTER(c_int)).contents.value
+
+    def pointers(self, addr, offset=-1, *args):
+        if offset == -1:
+            return addr
+        elif len(args) == 0:
+            resolved = self.readInteger(addr)
+            if self.debugPtrs:
+                print('[{0:X}:{1:X}]+{2:X}->'.format(addr, resolved, offset))
+            return resolved + offset
+        else:
+            resolved = self.readInteger(addr)
+            if self.debugPtrs:
+                print('[{0:X}:{1:X}]+{2:X}:{3:X}->'.format(addr, resolved, offset, resolved + offset))
+            return self.pointers(resolved + offset, *args)
+
+    def readByPointer(self, type, addr, *offsets):
+        contents = cast(self.readByteArr(self.pointers(addr, *offsets), sizeof(type)), POINTER(type)).contents
+        if isinstance(contents, _SimpleCData):
+            return contents.value
+        return contents
