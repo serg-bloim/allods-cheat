@@ -1,4 +1,5 @@
 from cheats import getOrCreateGame
 
-
-print(getOrCreateGame().getState())
+player = getOrCreateGame().getPlayer()
+print(player.getUnitCount())
+print([hex(x.addr) for  x in player.getTCs()])

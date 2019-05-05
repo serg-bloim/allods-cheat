@@ -9,7 +9,9 @@ PROCESS_ALL_ACCESS = 0x1F0FFF
 
 
 def openProc(pid):
-    return OpenProcess(PROCESS_ALL_ACCESS, False, pid)
+    global currentHandle
+    currentHandle = OpenProcess(PROCESS_ALL_ACCESS, False, pid)
+    return currentHandle
 
 
 class MemUtils:
@@ -17,13 +19,8 @@ class MemUtils:
         self.handle = handle
         self.debugPtrs = True
 
-    def readInteger(self, addr):
-        num = c_int(0)
-        bufferSize = 4
-        bytesRead = c_ulong(0)
-        if ReadProcessMemory(self.handle, addr, byref(num), bufferSize, byref(bytesRead)):
-            num.value
-        return num.value
+    def readInteger(self, addr, *offsets):
+        return self.readByPointer(c_int, addr, *offsets)
 
     def readByteArr(self, addr, size):
         from utils import hex0
@@ -58,3 +55,16 @@ class MemUtils:
         if isinstance(contents, _SimpleCData):
             return contents.value
         return contents
+
+    def readInt16(self, addr, *offsets):
+        return self.readByPointer(c_int16, addr, *offsets)
+
+
+def getMemOps() -> MemUtils:
+    global gmemOps
+    global currentHandle
+    try:
+        gmemOps
+    except NameError:
+        gmemOps = MemUtils(currentHandle)
+    return gmemOps
