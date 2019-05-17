@@ -10,7 +10,8 @@ api = Api(app)
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    from flask import render_template
+    return render_template('index.html')
 
 api.add_resource(GameResource, '/game')
 
