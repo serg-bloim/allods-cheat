@@ -1,0 +1,41 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Settings</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="close()">
+                    X
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content style="margin: 16px; padding:16px">
+            <div class="settings-content" ng-repeat="(name,v) in settings.snd">
+                <md-slider-container>
+                    <span style="max-width: 100px">{{name}}</span>
+                    <md-slider min="0" max="1" step=0.01 ng-change="updateVolume(name, 'volume')" ng-model="settings.snd[name].volume" aria-label="red"
+                        id="red-slider">
+                    </md-slider>
+                    <md-input-container>
+                        <input type="number" ng-model="settings.snd[name].volume" aria-label="Red"
+                            aria-controls="red-slider">
+                    </md-input-container>
+                </md-slider-container>
+                <md-checkbox ng-model="settings.snd[name].loop" ng-change="updateVolume(name, 'loop')" aria-label="Checkbox 1">
+                        Loop
+                      </md-checkbox>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="saveClose()">
+                Save
+            </md-button>
+            <span flex></span>
+            <md-button ng-click="close()">
+                Close
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

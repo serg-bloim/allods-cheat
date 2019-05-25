@@ -1,0 +1,44 @@
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="static/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="static/lib/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="static/lib/angular-material.min.css">
+    <script src="static/lib/lodash.min.js"></script>
+    <script src="static/lib/idle-tc-rule.js"></script>
+</head>
+
+<body ng-app="BlankApp" ng-cloak ng-controller="myCtrl" id="main">
+<input type="number" ng-model="updateInterval" ng-change="changeUpdateInterval()"/>
+<input ng-model="url"/>
+<input type="checkbox" ng-model="dbg"/>
+<button ng-click="openSettings($event)">Settings</button>
+<table>
+    <tr ng-repeat="tc in state.tcs" class="bg-{{tc.flags.color}}">
+        <td>TC</td>
+        <td>{{ tc.prodProgress *100 | floor }}%</td>
+        <td>{{tc.queue}}</td>
+    </tr>
+</table>
+<script src="static/lib/angular.min.js"></script>
+<script src="static/lib/angular-aria.min.js"></script>
+<script src="static/lib/angular-animate.min.js"></script>
+<script src="static/lib/angular-messages.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="static/lib/angular-material.min.js"></script>
+
+<!-- Your application bootstrap  -->
+
+<script src="static/lib/script.js"></script>
+<script src="static/lib/settings-ctrl.js"></script>
+<audio id="snd_almost_idle_tc" loop="true" preload="auto">
+    <source src="static/audio/sound1.wav"/>
+</audio>
+<audio id="snd_idle_tc" loop="true" preload="auto">
+    <source src="static/audio/sound2.wav"/>
+</audio>
+<!-- </body> -->
+</html>
