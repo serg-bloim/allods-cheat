@@ -14,14 +14,16 @@ function idleTCRule(tcs) {
     var sndIdle = document.getElementById('snd_idle_tc');
     var sndAlmostIdle = document.getElementById('snd_almost_idle_tc');
     if (anyIdle) {
-        sndAlmostIdle.pause();
-        play(sndIdle)
+        // sndAlmostIdle.pause();
+        // play(sndIdle)
     } else {
         sndIdle.pause();
         if (anyCloseIdle) {
-            play(sndAlmostIdle);
+            // play(sndAlmostIdle);
+            alarms.tcs.enable();
         } else {
-            sndAlmostIdle.pause();
+            // sndAlmostIdle.pause();
+            alarms.tcs.disable();
         }
     }
 }

@@ -16,6 +16,7 @@ class Game:
 
     def getState(self):
         return {
+            'playerStats': self.getPlayer().getStats().getState(),
             'tcs': [ tc.getState() for tc in self.getPlayer().getTCs()]
         }
 

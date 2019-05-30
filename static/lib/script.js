@@ -46,3 +46,42 @@ function setUpdateInterval() {
 }
 // app.filter('floor', Math.floor);
 app.filter('floor', () => { return Math.floor });
+class Alarm {
+    constructor(iconElem) {
+        this.icon = $(iconElem);
+        this.loop = false;
+        this.enabled = false;
+    }
+    enable() {
+        this.enabled = true;
+        this.icon.css('opacity', 1)
+        this.runAnimation();
+    }
+    runAnimation() {
+        if (this.enabled) {
+            var next = {}
+            if (this.loop) {
+                var a = this;
+                next.complete = function () {
+                    a.runAnimation();
+                }
+            }
+            this.icon
+                .fadeOut()
+                .fadeIn(next);
+        }
+    }
+    disable() {
+        if (this.enabled) {
+            this.enabled = false;
+            this.icon.finish()
+                .css('opacity', 0);
+        }
+    }
+}
+alarms = {}
+alarms.tcs = new Alarm('#icon-tc-idle')
+alarms.housing = new Alarm('#icon-housing')
+alarms.sheep = new Alarm('#icon-sheep')
+
+alarms.tcs.loop = true;

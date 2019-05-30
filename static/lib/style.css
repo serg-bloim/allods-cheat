@@ -7,3 +7,25 @@
 .settings-content{
     width: 600px;
 }
+
+.notification{
+    height: 100px;
+    width: 100px;
+    opacity: 0;
+}
+
+.tc-idle{
+    background-color: red;
+}
+
+.housing{
+    background-color: orange;
+}
+
+.sheep{
+    background-color: greenyellow;
+}
+
+.brdr{
+    border: 1px solid black;
+}
