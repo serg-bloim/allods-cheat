@@ -3,7 +3,7 @@ import random
 from flask_restful import Resource
 
 start = .7
-end = 1
+end = .74
 
 
 class GameResourceDebug(Resource):

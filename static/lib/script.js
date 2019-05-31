@@ -14,6 +14,10 @@ app.controller("myCtrl", ($scope, $http, $mdDialog) => {
                 volume: 1,
                 loop: true
             },
+            housing: {
+                volume: 1,
+                loop: true
+            },
         }
     }
 
@@ -48,15 +52,30 @@ function setUpdateInterval() {
 // app.filter('floor', Math.floor);
 app.filter('floor', () => { return Math.floor });
 class Alarm {
-    constructor(iconElem) {
+    constructor(iconElem, soundElemId, repeat) {
         this.icon = $(iconElem);
-        this.loop = false;
+        this.snd = $(soundElemId)[0];
+        this.loop = true;
         this.enabled = false;
+        if(repeat === undefined){
+            repeat=false;
+        }
+        this.repeat = repeat;
     }
     enable() {
-        this.enabled = true;
-        this.icon.css('opacity', 1)
-        this.runAnimation();
+        if (!this.enabled || this.repeat) {
+            this.enabled = true;
+            this.icon.css('opacity', 1)
+            this.runAnimation();
+            this.snd.play().then(_ => {
+                // Automatic playback started!
+                // Show playing UI.
+              })
+              .catch(error => {
+                // Auto-play was prevented
+                // Show paused UI.
+              });;
+        }
     }
     runAnimation() {
         if (this.enabled) {
@@ -77,12 +96,14 @@ class Alarm {
             this.enabled = false;
             this.icon.finish()
                 .css('opacity', 0);
+            this.snd.pause();
         }
     }
 }
 alarms = {}
-alarms.tcs = new Alarm('#icon-tc-idle')
-alarms.housing = new Alarm('#icon-housing')
-alarms.sheep = new Alarm('#icon-sheep')
+
+alarms.tcs = new Alarm('#icon-tc-idle', '#snd_almost_idle_tc', true)
+alarms.housing = new Alarm('#icon-housing', '#snd_housing')
+alarms.sheep = new Alarm('#icon-sheep', '#sound4')
 
 alarms.tcs.loop = true;
