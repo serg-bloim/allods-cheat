@@ -22,6 +22,7 @@ app.controller("myCtrl", ($scope, $http, $mdDialog) => {
         $http.get($scope.url).then((resp) => {
             $scope.state = resp.data
             idleTCRule($scope.state.tcs)
+            housingRule($scope.state)
         })
     }
     $scope.changeUpdateInterval();

@@ -16,7 +16,7 @@ class GameResourceDebug(Resource):
                 "gold": 100.0,
                 "pop": 5.0,
                 "popMax": 200.0,
-                "popFree": 5.0,
+                "popFree": 3.0,
                 "unitsCreating": 1.0,
                 "unitsQueued": 1.0
             },
