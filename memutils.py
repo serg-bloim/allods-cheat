@@ -13,6 +13,10 @@ def openProc(pid):
     currentHandle = OpenProcess(PROCESS_ALL_ACCESS, False, pid)
     return currentHandle
 
+debug_enable = False
+def debug(msg):
+    if(debug_enable):
+        print(msg)
 
 class MemUtils:
     def __init__(self, handle):
@@ -42,12 +46,12 @@ class MemUtils:
         elif len(args) == 0:
             resolved = self.readInteger(addr)
             if self.debugPtrs:
-                print('[{0:X}:{1:X}]+{2:X}->'.format(addr, resolved, offset))
+                debug('[{0:X}:{1:X}]+{2:X}->{3:X}'.format(addr, resolved, offset, resolved + offset))
             return resolved + offset
         else:
             resolved = self.readInteger(addr)
             if self.debugPtrs:
-                print('[{0:X}:{1:X}]+{2:X}:{3:X}->'.format(addr, resolved, offset, resolved + offset))
+                debug('[{0:X}:{1:X}]+{2:X}->{3:X}'.format(addr, resolved, offset, resolved + offset))
             return self.pointers(resolved + offset, *args)
 
     def readByPointer(self, type, addr, *offsets):
@@ -68,6 +72,9 @@ def getMemOps() -> MemUtils:
     global currentHandle
     try:
         gmemOps
+        if gmemOps != None:
+            if gmemOps.handle != currentHandle:
+                gmemOps = MemUtils(currentHandle)
     except NameError:
         gmemOps = MemUtils(currentHandle)
     return gmemOps

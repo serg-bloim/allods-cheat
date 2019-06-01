@@ -42,6 +42,9 @@ app.controller("myCtrl", ($scope, $http, $mdDialog) => {
             fullscreen: $scope.customFullscreen // Only for -xs, -sm 
         });
     }
+    $scope.reset = function(ev){
+        $http.get('reset')
+    }
 })
 function setUpdateInterval() {
     console.log('setUpdateInterval')

@@ -6,8 +6,11 @@ class Unit:
     def __init__(self, addr: int):
         self.addr = addr
 
+    def getTypeCode(self):
+        return getMemOps().readInt16(self.addr + 8, 0x10)
+
     def getType(self):
-        type = getMemOps().readInt16(self.addr + 8, 0x10)
+        type = self.getTypeCode()
         if type in UnitType._value2member_map_:
             return UnitType(type)
         return UnitType.OTHER
@@ -23,3 +26,7 @@ class Unit:
             'typeName': type.name,
             'health': self.getHealth(),
         }
+
+    def __str__(self) -> str:
+        return "{0} : {1}/{2}".format(hex(self.addr), self.getTypeCode(), self.getType().name)
+
