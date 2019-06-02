@@ -42,6 +42,9 @@ app.controller("myCtrl", ($scope, $http, $mdDialog) => {
             fullscreen: $scope.customFullscreen // Only for -xs, -sm 
         });
     }
+    $scope.reset = function(ev){
+        $http.get('reset')
+    }
 }).filter('icon', function(){
     return function(id, type){
         return 'icon/'+type+'_icon'+id+'.png'

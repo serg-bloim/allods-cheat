@@ -18,7 +18,8 @@ def findPid():
 def getOrCreateGame() -> Game:
     global game
     try:
-        return game
+        if game == None:
+            game = connectGame(findPid())
     except NameError:
         game = connectGame(findPid())
     return game
