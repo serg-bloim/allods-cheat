@@ -1,10 +1,12 @@
+from Player import Player
 from UnitType import UnitType
 from memutils import getMemOps
 
 
 class Unit:
-    def __init__(self, addr: int):
+    def __init__(self, addr: int, player:Player):
         self.addr = addr
+        self.player = player
 
     def getTypeCode(self):
         return getMemOps().readInt16(self.addr + 8, 0x10)

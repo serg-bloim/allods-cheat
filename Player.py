@@ -53,6 +53,13 @@ class Stats:
         return self.memOps.readFloat(self.addr+0x140)
 
 
+class UnitClass(object):
+    def __init__(self, addr):
+        self.addr = addr
+
+    def getIconId(self):
+        return getMemOps().readInt16(self.addr+0x54)
+
 class Player:
     def __init__(self, memOps: MemUtils, playerA: int):
         self.memOps = memOps
@@ -71,7 +78,11 @@ class Player:
         return [Building(u.addr) for u in self.getUnits() if u.getType() == UnitType.TC]
 
     def getUnits(self) -> [Unit]:
-        return [Unit(ua) for ua in self.getUnitsA()]
+        return [Unit(ua, self) for ua in self.getUnitsA()]
+
+    def getUserType(self, ind):
+        return UnitClass(self.memOps.readInteger(self.addr + 0x74, ind*4))
+
 
     def getStats(self) -> Stats:
         return self.stats

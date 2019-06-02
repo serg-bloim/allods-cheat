@@ -27,12 +27,15 @@ class Building(Unit):
         if genSize == 0:
             return []
         queue = mem.readInt(self.addr + 0x1C0)
+        unit_type_arr = mem.readInteger(self.player.getUnitTypeArr())
 
         def generator():
             for batch in range(0, genSize):
                 ba = queue + batch * 4
                 type = mem.readInt16(ba)
                 size = mem.readInt16(ba + 2)
+                self.player.getUserType(type)
+                item = QueueItem(type)
                 for _ in range(size):
                     yield type
 
