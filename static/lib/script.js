@@ -42,7 +42,11 @@ app.controller("myCtrl", ($scope, $http, $mdDialog) => {
             fullscreen: $scope.customFullscreen // Only for -xs, -sm 
         });
     }
-})
+}).filter('icon', function(){
+    return function(id, type){
+        return 'icon/'+type+'_icon'+id+'.png'
+    }
+});
 function setUpdateInterval() {
     console.log('setUpdateInterval')
     clearInterval(this.timerId)

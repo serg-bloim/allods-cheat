@@ -20,17 +20,18 @@
 <div>
     <table>
         <tr>
-            <td><div class="brdr"><div id="icon-tc-idle" class="notification tc-idle"></div> </div>         </td>
-            <td><div class="brdr"><div id="icon-housing" class="notification housing"></div> </div>       </td>
-            <td><div class="brdr"><div id="icon-sheep" class="notification sheep"></div>   </div>          </td>
-            <td><div class="brdr"><div id="" class="notification"></div>         </div>      </td>
+            <td><div class="brdr"><div id="icon-tc-idle" class="notification tc-idle"></div></div></td>
+            <td><div class="brdr"><div id="icon-housing" class="notification housing"></div></div></td>
+            <td><div class="brdr"><div id="icon-sheep" class="notification sheep"></div></div></td>
+            <td><div class="brdr"><div id="" class="notification"></div></div></td>
         </tr>
     </table>
 </div>
 <table>
     <tr ng-repeat="tc in state.tcs" class="bg-{{tc.flags.color}}">
+        <td><img src="{{109 | icon :building}}"/></td>
         <td>TC</td>
-        <td>{{ tc.prodProgress *100 | floor }}%</td>
+        <td>{{ tc.prodProgress * 100 | floor }}%</td>
         <td>{{tc.queue}}</td>
     </tr>
 </table>
