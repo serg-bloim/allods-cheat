@@ -1,4 +1,6 @@
+import json
+
 from cheats import getOrCreateGame
 
 print('player: ' + hex(getOrCreateGame().getPlayer().addr))
-print(getOrCreateGame().getState())
+print(json.dumps(getOrCreateGame().getState(), indent=2))

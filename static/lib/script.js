@@ -46,7 +46,12 @@ app.controller("myCtrl", ($scope, $http, $mdDialog) => {
         $http.get('reset')
     }
 }).filter('icon', function(){
-    return function(id, type){
+    return function(input, type){
+        var id = input
+        if(_.isPlainObject(input)){
+            type = ['', 'unit', 'building', 'tech'][input['kind']];
+            id = input['iconId']
+        }
         return 'static/icon/'+type+'_icon_'+(id.toString().padStart(3,'0'))+'.png'
     }
 });
