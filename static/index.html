@@ -30,8 +30,7 @@
 </div>
 <table>
     <tr ng-repeat="tc in state.tcs" class="bg-{{tc.flags.color}}">
-        <td><img src="{{28 | icon :building}}"/></td>
-        <td>TC</td>
+        <td><img ng-attr-src="{{28 | icon:'building'}}"/></td>
         <td>{{ tc.prodProgress * 100 | floor }}%</td>
         <td><img src=""/></td>
     </tr>

@@ -1,3 +1,5 @@
+from enum import IntEnum, Enum
+
 import memutils
 from Unit import Unit
 from memutils import getMemOps
@@ -6,12 +8,18 @@ from memutils import getMemOps
 class QueueItem(object):
     pass
 
+class UnitKind(IntEnum):
+    UNIT=1
+    BUILDING=2
+    TECH=3
 
 class UnitInProd(object):
-    def __init__(self, type, progress, remainingTime):
+    def __init__(self, type, progress, remainingTime, iconId = -1, kind=UnitKind.UNIT):
         self.type = type
         self.progress = progress
         self.remainingTime = remainingTime
+        self.iconId = iconId
+        self.kind = int(kind)
 
     def exists(self):
         return self.type != -1
@@ -27,17 +35,16 @@ class Building(Unit):
         if genSize == 0:
             return []
         queue = mem.readInt(self.addr + 0x1C0)
-        unit_type_arr = mem.readInteger(self.player.getUnitTypeArr())
-
+        # unit_type_arr = mem.readInteger(self.player.getUnitTypeArr())
         def generator():
             for batch in range(0, genSize):
                 ba = queue + batch * 4
                 type = mem.readInt16(ba)
                 size = mem.readInt16(ba + 2)
-                self.player.getUserType(type)
-                item = QueueItem(type)
+                iconId = self.player.getUserType(type).getIconId()
+                item = UnitInProd(type, 0, 0, iconId, UnitKind.UNIT)
                 for _ in range(size):
-                    yield type
+                    yield item
 
         return list(generator())
 
@@ -59,9 +66,9 @@ class Building(Unit):
         if techProd.exists() and progress == 0 and len(queue) == 0:
             progress = techProd.progress
             remainingTime = techProd.remainingTime
-            queue = [techProd.type]
+            queue = [techProd]
         state.update({
-            'queue': queue,
+            'queue': [ vars(i) for i in queue],
             'prodProgress': progress,
             'prodRemaining': remainingTime,
             'techInProd': vars(techProd),
@@ -75,13 +82,15 @@ class Building(Unit):
         type = -1
         progress = 0
         remainingTime = 0
+        iconId = -1
         if currTech != 0:
             type = mem.readInt16(currTech, 0x40)
             unitLibrary = mem.readInteger(self.addr + 0xC, 0x12A0)
             timeCreating = mem.readFloat(unitLibrary, 0x10 * type)
             timeTotal1 = mem.readInt16(unitLibrary,  0x10 * type + 0xC)
-            timeTotal2 = mem.readInt16(unitLibrary + 8, 0, 0x26 + type * 0x44)
+            timeTotal2 = mem.readInt16(unitLibrary + 8, 0,  type * 0x44 + 0x26)
+            iconId = mem.readInt16(unitLibrary + 8, 0,  type * 0x44 + 0x2C)
             timeTotal = timeTotal1 + timeTotal2
             progress = timeCreating / timeTotal
             remainingTime = timeTotal - timeCreating
-        return UnitInProd(type=type, progress=progress, remainingTime=remainingTime)
+        return UnitInProd(type=type, progress=progress, remainingTime=remainingTime, iconId = iconId, kind=UnitKind.TECH)

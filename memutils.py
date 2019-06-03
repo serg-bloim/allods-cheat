@@ -32,9 +32,10 @@ class MemUtils:
         buffer = create_string_buffer(size)
         bytesRead = c_ulong(0)
         if ReadProcessMemory(self.handle, addr, buffer, c_int(size), byref(bytesRead)) and bytesRead.value == size:
-            print("Success: " + hex0(buffer.raw))
-        else:
-            print("Failed. " + hex0(buffer.raw))
+            1
+            # print("Success: " + hex0(buffer.raw))
+        # else:
+        #     print("Failed. " + hex0(buffer.raw))
         return buffer
 
     def readInt(self, addr):

@@ -75,7 +75,7 @@ class Player:
         return self.memOps.readInteger(self.unitContainerA + 8)
 
     def getTCs(self) -> [Building]:
-        return [Building(u.addr) for u in self.getUnits() if u.getType() == UnitType.TC]
+        return [Building(u.addr, self) for u in self.getUnits() if u.getType() == UnitType.TC]
 
     def getUnits(self) -> [Unit]:
         return [Unit(ua, self) for ua in self.getUnitsA()]
@@ -83,6 +83,8 @@ class Player:
     def getUserType(self, ind):
         return UnitClass(self.memOps.readInteger(self.addr + 0x74, ind*4))
 
+    def getUnitClass(self, id) -> UnitClass:
+        return UnitClass(self.memOps.readInteger(self.addr + 0x78, 4*id))
 
     def getStats(self) -> Stats:
         return self.stats

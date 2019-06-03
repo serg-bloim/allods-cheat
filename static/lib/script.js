@@ -47,7 +47,7 @@ app.controller("myCtrl", ($scope, $http, $mdDialog) => {
     }
 }).filter('icon', function(){
     return function(id, type){
-        return 'icon/'+type+'_icon'+id+'.png'
+        return 'static/icon/'+type+'_icon_'+(id.toString().padStart(3,'0'))+'.png'
     }
 });
 function setUpdateInterval() {
