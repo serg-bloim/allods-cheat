@@ -1,7 +1,7 @@
-from Building import Building
-from UnitType import UnitType
-from Unit import Unit
-from memutils import MemUtils, getMemOps
+from aoe2stats.Building import Building
+from aoe2stats.UnitType import UnitType
+from aoe2stats.Unit import Unit
+from aoe2stats.memutils import MemUtils, getMemOps
 
 
 class Stats:

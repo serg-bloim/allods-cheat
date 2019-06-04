@@ -1,10 +1,10 @@
 from itertools import groupby
 from time import sleep
 
-from cheats import getOrCreateGame
-from gameutils import explainBuilding
-from utils import *
-from Unit import Unit
+from aoe2stats.cheats import getOrCreateGame
+from aoe2stats.gameutils import explainBuilding
+from aoe2stats.utils import *
+from aoe2stats.Unit import Unit
 
 game = getOrCreateGame()
 playerA = game.getPlayerA()

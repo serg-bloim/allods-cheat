@@ -1,6 +1,6 @@
 from ctypes import *
-from utils import *
-from memutils import *
+from aoe2stats.utils import *
+from aoe2stats.memutils import *
 
 OpenProcess = windll.kernel32.OpenProcess
 ReadProcessMemory = windll.kernel32.ReadProcessMemory

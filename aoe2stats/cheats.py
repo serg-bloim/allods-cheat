@@ -1,7 +1,7 @@
 import psutil
 
-from Game import Game
-from memutils import *
+from aoe2stats.Game import Game
+from aoe2stats.memutils import *
 
 
 def connectGame(pid):

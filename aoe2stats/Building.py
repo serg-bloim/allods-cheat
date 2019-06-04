@@ -1,8 +1,8 @@
-from enum import IntEnum, Enum
+from enum import IntEnum
 
-import memutils
-from Unit import Unit
-from memutils import getMemOps
+import aoe2stats.memutils
+from aoe2stats.Unit import Unit
+from aoe2stats.memutils import getMemOps
 
 
 class QueueItem(object):

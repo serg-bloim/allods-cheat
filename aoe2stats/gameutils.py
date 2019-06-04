@@ -1,4 +1,4 @@
-from memutils import getMemOps
+from aoe2stats.memutils import getMemOps
 
 
 def explainBuilding(buldingA):

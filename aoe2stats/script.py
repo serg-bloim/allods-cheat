@@ -1,7 +1,7 @@
 from itertools import groupby
 
-from Unit import Unit
-from cheats import getOrCreateGame
+from aoe2stats.Unit import Unit
+from aoe2stats.cheats import getOrCreateGame
 
 game = getOrCreateGame()
 playerA = game.getPlayerA()

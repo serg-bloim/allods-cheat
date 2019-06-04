@@ -1,7 +1,7 @@
 from ctypes import c_int16, c_int
 
-from Player import Player
-from memutils import MemUtils
+from aoe2stats.Player import Player
+from aoe2stats.memutils import MemUtils
 
 
 class Game:

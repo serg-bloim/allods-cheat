@@ -1,11 +1,11 @@
 from flask import Flask
 from flask_restful import Api
 
-from GameResourceDebug import GameResourceDebug
-from GameResource import GameResource
-from ResetResource import ResetResource
-from cheats import findPid
-from memutils import openProc
+from aoe2stats.GameResourceDebug import GameResourceDebug
+from aoe2stats.GameResource import GameResource
+from aoe2stats.ResetResource import ResetResource
+from aoe2stats.cheats import findPid
+from aoe2stats.memutils import openProc
 
 app = Flask(__name__)
 api = Api(app)
@@ -18,7 +18,9 @@ api.add_resource(GameResource, '/game')
 api.add_resource(GameResourceDebug, '/game-dbg')
 api.add_resource(ResetResource, '/reset')
 
-if __name__ == '__main__':
+def startServer():
     openProc(findPid())
     app.run(debug=True)
 
+if __name__ == '__main__':
+    startServer()

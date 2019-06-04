@@ -1,6 +1,6 @@
 from flask_restful import Resource
 
-import cheats
+import aoe2stats.cheats
 
 class ResetResource(Resource):
     def get(self):

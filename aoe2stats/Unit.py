@@ -1,6 +1,6 @@
 # from Player import Player
-from UnitType import UnitType
-from memutils import getMemOps
+from aoe2stats.UnitType import UnitType
+from aoe2stats.memutils import getMemOps
 
 
 class Unit:
