@@ -27,7 +27,6 @@ class MemUtils:
         return self.readByPointer(c_int, addr, *offsets)
 
     def readByteArr(self, addr, size):
-        from utils import hex0
         global processHandle
         buffer = create_string_buffer(size)
         bytesRead = c_ulong(0)

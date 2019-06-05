@@ -6,7 +6,7 @@ from aoe2stats.memutils import getMemOps
 class Unit:
     def __init__(self, addr: int, player):
         self.addr = addr
-        from Player import Player
+        from aoe2stats.Player import Player
         self.player:Player
         self.player = player
 
