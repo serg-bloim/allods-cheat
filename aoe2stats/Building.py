@@ -1,6 +1,6 @@
 from enum import IntEnum
 
-import aoe2stats.memutils
+from aoe2stats import memutils
 from aoe2stats.Unit import Unit
 from aoe2stats.memutils import getMemOps
 
