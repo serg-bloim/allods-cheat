@@ -2,3 +2,6 @@ __pycache__/
 venv/
 .idea/
 *.py__*
+dist/
+build/
+aoe2stats.egg-info/
