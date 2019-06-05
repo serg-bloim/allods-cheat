@@ -7,7 +7,7 @@ from aoe2stats.ResetResource import ResetResource
 from aoe2stats.cheats import findPid
 from aoe2stats.memutils import openProc
 
-app = Flask(__name__)
+app = Flask('')
 api = Api(app)
 
 @app.route("/")
