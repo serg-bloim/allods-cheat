@@ -5,7 +5,7 @@ import argparse
 
 from aoe2stats.installer import install
 
-defaultStaticFilesVersion = '0.0.1-rc.1'
+defaultStaticFilesVersion = '0.0.1-rc.2'
 
 def __add_options(parser):
     parser.add_argument('cmd', metavar='CMD', type=str, nargs='?', default='install_run')
