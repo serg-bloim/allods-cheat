@@ -24,7 +24,7 @@
         <tr>
             <td ng-repeat="alarm in alarms">
                 <div class="brdr"><div id="icon-{{alarm.name}}" class="notification {{alarm.name}}" ng-click="alarm.snd.muted=!alarm.snd.muted"><img src="static/app_icon/mute-512.png" style="{{alarm.snd.muted || 'display: none'}}"/></div></div>
-                <audio id="snd-{{alarm.name}}" loop="{{alarm.loop}}" preload="auto">
+                <audio id="snd-{{alarm.name}}" preload="auto">
                         <source ng-src="{{alarm.soundUrl}}"/>
                 </audio>
             </td>
@@ -53,7 +53,7 @@
 <!-- <audio id="snd_almost_idle_tc" loop="true" preload="auto">
     <source src="static/audio/bell-cut.mp3"/>
 </audio> -->
-<audio id="snd_idle_tc" preload="auto">
+<!-- <audio id="snd_idle_tc" preload="auto">
     <source src="static/audio/sound2.wav"/>
 </audio>
 <audio id="sound3" preload="auto">
@@ -70,7 +70,7 @@
 </audio>
 <audio id="sound7" preload="auto">
     <source src="static/audio/whistle-cut.mp3"/>
-</audio>
+</audio> -->
 <script src="static/lib/script.js"></script>
 <script src="static/lib/settings-ctrl.js"></script>
 <!-- </body> -->

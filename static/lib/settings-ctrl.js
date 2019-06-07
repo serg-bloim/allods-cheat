@@ -8,7 +8,7 @@ function SettingsCtrl($scope, $mdDialog) {
     };
 
     $scope.updateVolume = function (alarm, opt) {
-        snd = alarm.snd;
+        var snd = $('#snd-'+alarm.name)[0];
         snd[opt] = alarm[opt];
     };
 
