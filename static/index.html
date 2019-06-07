@@ -18,6 +18,7 @@
 <input type="checkbox" ng-model="dbg"/>
 <button ng-click="openSettings($event)">Settings</button>
 <button ng-click="reset($event)">Reset</button>
+<button ng-click="muteAll($event)">{{muted? "Unmute all":"Mute all"}}</button>
 <div>
     <table>
         <tr>
@@ -32,7 +33,7 @@
     <tr ng-repeat="tc in state.tcs" class="bg-{{tc.flags.color}}">
         <td><img ng-attr-src="{{28 | icon:'building'}}"/></td>
         <td width="50px">{{ tc.prodProgress * 100 | floor }}%</td>
-        <td width=100px"><md-progress-linear md-mode="determinate" value="{{ tc.prodProgress * 100 | floor }}"></md-progress-linear></td>
+        <td width="100px"><md-progress-linear md-mode="determinate" value="{{ tc.prodProgress * 100 | floor }}"></md-progress-linear></td>
         <td width="30px" align="right">{{ tc.prodRemaining | floor }}</td>
         <td><img ng-repeat="qi in tc.queue" ng-attr-src="{{qi | icon}}"/></td>
     </tr>

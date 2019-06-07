@@ -45,6 +45,13 @@ app.controller("myCtrl", ($scope, $http, $mdDialog) => {
     $scope.reset = function(ev){
         $http.get('reset')
     }
+    $scope.muted=false;
+    $scope.muteAll=function(ev){
+        $scope.muted = !$scope.muted;
+        $('audio').each(function(i,elem){
+            elem.muted=$scope.muted;
+        })
+    }
 }).filter('icon', function(){
     return function(input, type){
         var id = input
