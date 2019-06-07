@@ -69,6 +69,7 @@ class Alarm {
         this.muted = false;
         this.soundUrl = soundUrl;
         this.volume = 1;
+        this.init_loop=this.loop;
     }
     enable() {
         if (!this.enabled || this.repeat) {
