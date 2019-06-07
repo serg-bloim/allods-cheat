@@ -82,6 +82,7 @@ class Alarm {
             repeat=false;
         }
         this.repeat = repeat;
+        this.muted = false;
     }
     enable() {
         if (!this.enabled || this.repeat) {

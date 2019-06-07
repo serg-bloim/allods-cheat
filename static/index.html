@@ -23,15 +23,9 @@
     <table>
         <tr>
             <td ng-repeat="alarm in alarms">
-                <div class="brdr"><div id="icon-{{alarm.name}}" class="notification {{alarm.name}}"></div></div>
-        </td>
+                <div class="brdr"><div id="icon-{{alarm.name}}" class="notification {{alarm.name}}" ng-click="alarm.snd.muted=!alarm.snd.muted"><img src="static/app_icon/mute-512.png" style="{{alarm.snd.muted || 'display: none'}}"/></div></div>
+            </td>
         </tr>
-        <!-- <tr>
-            <td><div class="brdr"><div id="icon-tc-idle" class="notification tc-idle"></div></div></td>
-            <td><div class="brdr"><div id="icon-housing" class="notification housing"></div></div></td>
-            <td><div class="brdr"><div id="icon-sheep" class="notification sheep"></div></div></td>
-            <td><div class="brdr"><div id="" class="notification"></div></div></td>
-        </tr> -->
     </table>
 </div>
 <table>
