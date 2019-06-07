@@ -11,6 +11,21 @@ function SettingsCtrl($scope, $mdDialog) {
         var snd = $('#snd-'+alarm.name)[0];
         snd[opt] = alarm[opt];
     };
+    var snds =
+        [
+            'bell-cut.mp3',
+            'ice-cubes.mp3',
+            'ring-cut.mp3',
+            'sound1.wav',
+            'sound2.wav',
+            'train-cut.mp3',
+            'whistle-cut.mp3'
+        ];
+
+    $scope.sounds=_.map(snds,
+        function(snd){
+            return { label: snd, url: '/static/audio/' + snd };
+        });
 
     // $scope.saveClose = function () {
     //     $scope.settings = $scope.changed;

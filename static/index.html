@@ -24,9 +24,7 @@
         <tr>
             <td ng-repeat="alarm in alarms">
                 <div class="brdr"><div id="icon-{{alarm.name}}" class="notification {{alarm.name}}" ng-click="alarm.snd.muted=!alarm.snd.muted"><img src="static/app_icon/mute-512.png" style="{{alarm.snd.muted || 'display: none'}}"/></div></div>
-                <audio id="snd-{{alarm.name}}" preload="auto">
-                        <source ng-src="{{alarm.soundUrl}}"/>
-                </audio>
+                <audio id="snd-{{alarm.name}}" preload="auto" ng-src="{{alarm.soundUrl}}"></audio>
             </td>
         </tr>
     </table>

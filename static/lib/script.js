@@ -4,22 +4,6 @@ app.controller("myCtrl", ($scope, $http, $mdDialog) => {
     $scope.changeUpdateInterval = setUpdateInterval;
     $scope.url = 'game'
     $scope.dbg = true
-    $scope.settings = {
-        snd: {
-            almost_idle_tc: {
-                volume: 1,
-                loop: true
-            },
-            idle_tc: {
-                volume: 1,
-                loop: true
-            },
-            housing: {
-                volume: 1,
-                loop: true
-            },
-        }
-    }
     $scope['alarms'] = alarms;
     $scope.update = () => {
         $scope.url = 'game' + ($scope.dbg ? '-dbg' : '');
@@ -84,6 +68,7 @@ class Alarm {
         this.repeat = repeat;
         this.muted = false;
         this.soundUrl = soundUrl;
+        this.volume = 1;
     }
     enable() {
         if (!this.enabled || this.repeat) {
