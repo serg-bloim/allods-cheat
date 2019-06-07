@@ -71,7 +71,7 @@ function setUpdateInterval() {
 // app.filter('floor', Math.floor);
 app.filter('floor', () => { return Math.floor });
 class Alarm {
-    constructor(name, iconElem, soundElemId, repeat) {
+    constructor(name, iconElem, soundElemId, soundUrl, repeat) {
         this.name = name;
         this.id = '#icon-'+name;
         this.icon = $(iconElem);
@@ -83,6 +83,7 @@ class Alarm {
         }
         this.repeat = repeat;
         this.muted = false;
+        this.soundUrl = soundUrl;
     }
     enable() {
         if (!this.enabled || this.repeat) {
@@ -90,6 +91,7 @@ class Alarm {
             var elem = $(this.id)
             elem.css('opacity', 1)
             this.runAnimation(elem);
+            this.snd = $('#snd-'+this.name)[0];
             this.snd.play().then(_ => {
                 // Automatic playback started!
                 // Show playing UI.
@@ -120,14 +122,15 @@ class Alarm {
             var elem = $(this.id)
             elem.finish()
                 .css('opacity', 0);
+            this.snd = $('#snd-'+this.name)[0];
             this.snd.pause();
         }
     }
 }
 alarms = {}
 
-alarms.tcs = new Alarm('tc-idle', '#icon-tc-idle', '#snd_almost_idle_tc', true)
-alarms.housing = new Alarm('housing','#icon-housing', '#snd_housing')
-alarms.sheep = new Alarm('sheep', '#icon-sheep', '#sound4')
+alarms.tcs = new Alarm('tc-idle', '#icon-tc-idle', '#snd_almost_idle_tc', 'static/audio/bell-cut.mp3', true)
+alarms.housing = new Alarm('housing','#icon-housing', '#snd_housing', 'static/audio/train-cut.mp3')
+alarms.sheep = new Alarm('sheep', '#icon-sheep', '#sound4', 'static/audio/bell-cut.mp3')
 
 alarms.tcs.loop = true;
