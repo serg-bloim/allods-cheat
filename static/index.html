@@ -22,11 +22,16 @@
 <div>
     <table>
         <tr>
+            <td ng-repeat="alarm in alarms">
+                <div class="brdr"><div id="icon-{{alarm.name}}" class="notification {{alarm.name}}"></div></div>
+        </td>
+        </tr>
+        <!-- <tr>
             <td><div class="brdr"><div id="icon-tc-idle" class="notification tc-idle"></div></div></td>
             <td><div class="brdr"><div id="icon-housing" class="notification housing"></div></div></td>
             <td><div class="brdr"><div id="icon-sheep" class="notification sheep"></div></div></td>
             <td><div class="brdr"><div id="" class="notification"></div></div></td>
-        </tr>
+        </tr> -->
     </table>
 </div>
 <table>
