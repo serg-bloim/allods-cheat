@@ -4,7 +4,6 @@ import zipfile
 
 base = ''
 
-
 def install(version, force=False):
     url = f'https://github.com/serg-bloim/aoe2-cheat/releases/download/{version}/static.zip'
     localfile = f'static{version}.zip'
