@@ -34,23 +34,23 @@ class GameResourceDebug(Resource):
                                     "iconId": 15,
                                     "kind": 1
                                 },
-                                {
-                                    "type": 83,
-                                    "progress": 0,
-                                    "remainingTime": 0,
-                                    "iconId": 15,
-                                    "kind": 1
-                                },
-                                {
-                                    "type": 83,
-                                    "progress": 0,
-                                    "remainingTime": 0,
-                                    "iconId": 15,
-                                    "kind": 1
-                                }
+                                # {
+                                #     "type": 83,
+                                #     "progress": 0,
+                                #     "remainingTime": 0,
+                                #     "iconId": 15,
+                                #     "kind": 1
+                                # },
+                                # {
+                                #     "type": 83,
+                                #     "progress": 0,
+                                #     "remainingTime": 0,
+                                #     "iconId": 15,
+                                #     "kind": 1
+                                # }
                             ],
-                            "prodProgress": 0.6148809814453124,
-                            "prodRemaining": 9.627975463867188,
+                            "prodProgress": 0.95,
+                            "prodRemaining": 2,
                             "techInProd": {
                                 "type": -1,
                                 "progress": 0,

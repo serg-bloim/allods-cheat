@@ -7,9 +7,9 @@ function SettingsCtrl($scope, $mdDialog) {
         $mdDialog.hide();
     };
 
-    $scope.updateVolume = function (name, opt) {
-        snd = document.getElementById('snd_'+name);
-        snd[opt] = $scope.settings.snd[name][opt];
+    $scope.updateVolume = function (alarm, opt) {
+        snd = alarm.snd;
+        snd[opt] = alarm[opt];
     };
 
     // $scope.saveClose = function () {

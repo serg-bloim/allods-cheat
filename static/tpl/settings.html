@@ -11,18 +11,18 @@
         </md-toolbar>
 
         <md-dialog-content style="margin: 16px; padding:16px">
-            <div class="settings-content" ng-repeat="(name,v) in settings.snd">
+            <div class="settings-content" ng-repeat="(name,alarm) in alarms">
                 <md-slider-container>
                     <span style="max-width: 100px">{{name}}</span>
-                    <md-slider min="0" max="1" step=0.01 ng-change="updateVolume(name, 'volume')" ng-model="settings.snd[name].volume" aria-label="red"
+                    <md-slider min="0" max="1" step=0.01 ng-change="updateVolume(alarm, 'volume')" ng-model="alarm.volume" aria-label="red"
                         id="red-slider">
                     </md-slider>
                     <md-input-container>
-                        <input type="number" ng-model="settings.snd[name].volume" aria-label="Red"
+                        <input type="number" ng-model="alarm.volume" aria-label="Red"
                             aria-controls="red-slider">
                     </md-input-container>
                 </md-slider-container>
-                <md-checkbox ng-model="settings.snd[name].loop" ng-change="updateVolume(name, 'loop')" aria-label="Checkbox 1">
+                <md-checkbox ng-model="alarm.loop" ng-change="updateVolume(alarm, 'loop')" aria-label="Checkbox 1">
                         Loop
                       </md-checkbox>
             </div>
