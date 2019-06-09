@@ -5,6 +5,7 @@ app.controller("myCtrl", ($scope, $http, $mdDialog) => {
     $scope.url = 'game'
     $scope.dbg = true
     $scope['alarms'] = alarms;
+    $scope.general_volume = 1;
     $scope.update = () => {
         $scope.url = 'game' + ($scope.dbg ? '-dbg' : '');
         $http.get($scope.url).then((resp) => {
@@ -36,6 +37,12 @@ app.controller("myCtrl", ($scope, $http, $mdDialog) => {
             elem.muted=$scope.muted;
         })
     }
+    $scope.updateVolumeAll = function(){
+        general_volume = $scope.general_volume;
+        for(var name in $scope.alarms){
+            $scope.alarms[name].updateVolume();
+        }
+    }
 }).filter('icon', function(){
     return function(input, type){
         var id = input
@@ -54,6 +61,7 @@ function setUpdateInterval() {
 }
 // app.filter('floor', Math.floor);
 app.filter('floor', () => { return Math.floor });
+general_volume = 1;
 class Alarm {
     constructor(name, iconElem, soundElemId, soundUrl, repeat) {
         this.name = name;
@@ -111,6 +119,9 @@ class Alarm {
             this.snd = $('#snd-'+this.name)[0];
             this.snd.pause();
         }
+    }
+    updateVolume(){
+        this.snd.volume = this.volume * general_volume
     }
 }
 alarms = {}

@@ -19,6 +19,9 @@
 <button ng-click="openSettings($event)">Settings</button>
 <button ng-click="reset($event)">Reset</button>
 <button ng-click="muteAll($event)">{{muted? "Unmute all":"Mute all"}}</button>
+<div style="display: inline-block">
+<md-slider min="0" max="1" step=0.01 ng-change="updateVolumeAll()" ng-model="general_volume" id="red-slider"></md-slider>
+</div>
 <div>
     <table>
         <tr>

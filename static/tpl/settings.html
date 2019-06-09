@@ -14,7 +14,7 @@
             <div class="settings-content" ng-repeat="(name,alarm) in alarms">
                 <md-slider-container>
                     <span style="max-width: 100px">{{name}}</span>
-                    <md-slider min="0" max="1" step=0.01 ng-change="updateVolume(alarm, 'volume')" ng-model="alarm.volume" aria-label="red"
+                    <md-slider min="0" max="1" step=0.01 ng-change="alarm.updateVolume()" ng-model="alarm.volume" aria-label="red"
                         id="red-slider">
                     </md-slider>
                     <md-input-container md-max-width="100px" class="settings-num-input">
