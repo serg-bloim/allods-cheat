@@ -10,8 +10,14 @@ app.controller("myCtrl", ($scope, $http, $mdDialog) => {
         $scope.url = 'game' + ($scope.dbg ? '-dbg' : '');
         $http.get($scope.url).then((resp) => {
             $scope.state = resp.data
-            idleTCRule($scope.state.tcs)
-            housingRule($scope.state)
+            if (resp.data.gameIsRunning) {
+                idleTCRule($scope.state.tcs)
+                housingRule($scope.state)
+            } else {
+                for (var aname in $scope.alarms) {
+                    $scope.alarms[aname].disable();
+                }
+            }
         })
     }
     $scope.changeUpdateInterval();
