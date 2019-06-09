@@ -16,8 +16,9 @@ class Game:
 
     def getState(self):
         return {
+            'gameIsRunning': self.getPlayerA() != 0,
             'playerStats': self.getPlayer().getStats().getState(),
-            'tcs': [ tc.getState() for tc in self.getPlayer().getTCs()]
+            'tcs': [tc.getState() for tc in self.getPlayer().getTCs()]
         }
 
 
