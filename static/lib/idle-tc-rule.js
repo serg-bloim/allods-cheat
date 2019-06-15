@@ -25,7 +25,7 @@ function isTcIdle(tc) {
     return tc.queue.length == 0;
 }
 function isTcCloseToIdle(tc) {
-    return tc.remainingTime <= 3.75 && tc.queue.length == 1;
+    return tc.prodRemaining <= 3.75 && tc.queue.length == 1;
 }
 
 function play(audio) {

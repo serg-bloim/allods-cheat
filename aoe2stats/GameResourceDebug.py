@@ -59,6 +59,7 @@ class GameResourceDebug(Resource):
                                 "kind": 3
                             }
                         }
-                    ]
+                    ],
+                    "gameIsRunning": True
                 }
 
