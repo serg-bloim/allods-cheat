@@ -38,5 +38,7 @@ def release():
     print(repo)
     rel: GitRelease = repo.create_git_release(tag=new_release_version, name=new_release_version, message='new release',target_commitish=sha)
     rel.upload_asset(wheel_file)
+    rel.upload_asset('upgrade.bat')
+    rel.upload_asset('static.zip')
 
 release()
