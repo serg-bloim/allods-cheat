@@ -46,8 +46,6 @@ def release():
     repo = git.Repo(search_parent_directories=True)
     sha = repo.head.object.hexsha
     print(sha)
-
-    return
     gh = Github(tokens.github)
     repo: Repository = gh.get_repo('serg-bloim/aoe2-cheat')
     print(repo)
