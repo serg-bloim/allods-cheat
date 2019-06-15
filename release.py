@@ -28,13 +28,13 @@ def release():
     sandbox.run_setup('setup.py', ['bdist_wheel'])
     wheel_file = 'dist/aoe2stats-{}-py3-none-any.whl'.format(new_release_version)
     print(wheel_file)
-    createStaticZip()
     createUpgradeBat(new_release_version)
+    createStaticZip()
     repo = git.Repo(search_parent_directories=True)
     sha = repo.head.object.hexsha
     print(sha)
 
-    gh = Github('d98e7ecbb416391a17c5399080d5ca489406b12d')
+    gh = Github('b27c41bba330d579fbcfa650475835b324faa97e')
     repo: Repository = gh.get_repo('serg-bloim/aoe2-cheat')
     print(repo)
     rel: GitRelease = repo.create_git_release(tag=new_release_version, name=new_release_version, message='new release',target_commitish=sha)
