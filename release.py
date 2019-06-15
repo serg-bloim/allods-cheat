@@ -1,3 +1,5 @@
+import os
+
 from github.GitRelease import GitRelease
 from github.Repository import Repository
 from setuptools import sandbox
@@ -7,11 +9,20 @@ import tokens
 from version import __version__
 import git
 
-def createStaticZip():
+def createStaticZip(version):
+    def addToZip(zf, path, zippath):
+        if os.path.isfile(path):
+            zf.write(path, zippath, zipfile.ZIP_DEFLATED)
+        elif os.path.isdir(path):
+            if zippath:
+                zf.write(path, zippath)
+            for nm in sorted(os.listdir(path)):
+                addToZip(zf, os.path.join(path, nm), os.path.join(zippath, nm))
     zipF = zipfile.ZipFile('static.zip', mode='w')
-    zipF.write('static')
+    addToZip(zipF, 'static', 'static')
     zipF.write('start.bat')
     zipF.write('upgrade.bat')
+    zipF.writestr('version.txt', version)
     zipF.close()
     return zipF.filename
 
@@ -28,7 +39,7 @@ def release():
     wheel_file = 'dist/aoe2stats-{}-py3-none-any.whl'.format(new_release_version)
     print(wheel_file)
     createUpgradeBat(new_release_version)
-    createStaticZip()
+    createStaticZip(new_release_version)
     repo = git.Repo(search_parent_directories=True)
     sha = repo.head.object.hexsha
     print(sha)
