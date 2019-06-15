@@ -6,3 +6,4 @@ dist/
 build/
 aoe2stats.egg-info/
 static.zip
+upgrade.bat
