@@ -9,6 +9,9 @@ import tokens
 from version import __version__
 import git
 
+def get_upgrade_filename(v):
+    return 'upgrade-{}.bat'.format(v)
+
 def createStaticZip(version):
     def addToZip(zf, path, zippath):
         if os.path.isfile(path):
@@ -21,15 +24,15 @@ def createStaticZip(version):
     zipF = zipfile.ZipFile('static.zip', mode='w')
     addToZip(zipF, 'static', 'static')
     zipF.write('start.bat')
-    zipF.write('upgrade.bat')
-    zipF.writestr('version.txt', version)
+    zipF.write(get_upgrade_filename(version))
+    zipF.writestr('static/version.txt', version)
     zipF.close()
     return zipF.filename
 
 def createUpgradeBat(v):
     with open('upgrade.bat.tpl', 'r') as ftpl:
         tpl = ftpl.read()
-        with open('upgrade.bat', 'w') as f:
+        with open(get_upgrade_filename(v), 'w') as f:
             f.write(tpl.format(v))
 
 
@@ -44,6 +47,7 @@ def release():
     sha = repo.head.object.hexsha
     print(sha)
 
+    return
     gh = Github(tokens.github)
     repo: Repository = gh.get_repo('serg-bloim/aoe2-cheat')
     print(repo)
