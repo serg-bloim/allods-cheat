@@ -5,7 +5,7 @@ app.controller("myCtrl", ($scope, $http, $mdDialog) => {
     $scope.url = 'game'
     $scope.dbg = true
     $scope['alarms'] = alarms;
-    $scope.general_volume = 1;
+    $scope.general_volume = .1;
     $scope.update = () => {
         $scope.url = 'game' + ($scope.dbg ? '-dbg' : '');
         $http.get($scope.url).then((resp) => {
