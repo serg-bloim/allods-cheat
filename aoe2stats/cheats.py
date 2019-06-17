@@ -3,7 +3,7 @@ import psutil
 from aoe2stats.Game import Game
 from aoe2stats.memutils import *
 
-proc_names = ['aoe2_x1.exe', "wk.exe"]
+proc_names = ['age2_x1.exe', "wk.exe"]
 def connectGame(pid):
     return Game(openProc(pid))
 
