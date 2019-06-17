@@ -19,6 +19,10 @@
 <button ng-click="openSettings($event)">Settings</button>
 <button ng-click="reset($event)">Reset</button>
 <button ng-click="muteAll($event)">{{muted? "Unmute all":"Mute all"}}</button>
+<select id="process_name" name="process_name" ng-change="onChangeProcName($event)" ng-model="proc_name">
+        <option value="wk.exe">offline</option>
+        <option value="aoe2_x1.exe">online</option>
+      </select>
 <div style="display: inline-block">
 <md-slider min="0" max="1" step=0.01 ng-change="updateVolumeAll()" ng-model="general_volume" id="red-slider"></md-slider>
 </div>

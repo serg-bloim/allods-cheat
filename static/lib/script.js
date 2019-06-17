@@ -3,6 +3,7 @@ app.controller("myCtrl", ($scope, $http, $mdDialog) => {
     $scope.updateInterval = 1000;
     $scope.changeUpdateInterval = setUpdateInterval;
     $scope.url = 'game'
+    $scope.proc_name = 'aoe2_x1.exe'
     $scope.dbg = true
     $scope['alarms'] = alarms;
     $scope.general_volume = 1;
@@ -48,6 +49,11 @@ app.controller("myCtrl", ($scope, $http, $mdDialog) => {
         for(var name in $scope.alarms){
             $scope.alarms[name].updateVolume();
         }
+    }
+    $scope.onChangeProcName = function(e){
+        $http.get('reset', {params:{
+            'proc_name':$scope.proc_name
+        }})
     }
 }).filter('icon', function(){
     return function(input, type){
